@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import DemoTable from '@/components/DemoTable'
-import TriggerField from '@/components/TriggerField'
+import NewTriggerField from '@/components/NewTriggerField'
 import TriggerUser from '@/components/TriggerUser'
 
 Vue.use(Router)
@@ -20,9 +20,9 @@ export default new Router({
       component: DemoTable
     },
     {
-      path: '/TriggerField',
-      name: 'TriggerField',
-      component: TriggerField
+      path: '/NewTriggerField',
+      name: 'NewTriggerField',
+      component: NewTriggerField
     },
     {
       path: '/TriggerUser',

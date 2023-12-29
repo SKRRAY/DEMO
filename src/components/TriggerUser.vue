@@ -32,8 +32,22 @@
                                 </el-form-item>
                                 <el-form-item v-show="item.content === '后台用户'" label-width="50px">
                                     <div class="addBackgroundUser">
-                                        <el-button type="text">+添加后台用户</el-button>
+                                        <el-button type="text" @click="addBackgroundUser">+添加后台用户</el-button>
                                     </div>
+                                    <el-dialog :visible.sync="isViewDialog" center :model="false" width="40%">
+                                        <div slot="title" class="dialogTitle">
+                                            <h3>批量输入邮箱</h3>
+                                        </div>
+                                        <div>
+                                            <el-input v-model="item.content" type="textarea" :autosize="{ minRows: 5 }"></el-input>
+                                            <span>*可批量输入邮箱，用分号";"分隔</span>
+                                            
+                                        </div>
+                                        <div slot="footer" class="addBatchMail">
+                                            <el-button @click="() => { isViewDialog = false }">取消</el-button>
+                                            <el-button type="success">批量添加</el-button>
+                                        </div>
+                                    </el-dialog>
                                 </el-form-item>
                                 <div class="addOpposite">
                                     <el-button type="text">+并且</el-button>
@@ -49,8 +63,6 @@
                 </el-row>
             </el-col>
         </el-row>
-        <div>
-        </div> 
     </div>
 </template>
 
@@ -59,6 +71,8 @@ export default({
     name: 'TriggerUser',
     data () {
         return {
+            // 控制添加后台用户弹窗
+            isViewDialog: false,
             // 满足条件选项
             cardOptions: [
                 {
@@ -119,7 +133,14 @@ export default({
                 content: this.cardOptions.length < 2 ? "后台用户" : "用户角色"
             }
             this.cardOptions.push(option);
+        },
+        // 添加后台用户
+        addBackgroundUser () {
+            this.isViewDialog = true;
         }
+    },
+    computed: {
+
     }
 })
 </script>
@@ -143,6 +164,12 @@ export default({
 .addBackgroundUser {
     text-align: left;
     width: 100%;
+}
+.dialogTitle {
+    text-align: left;
+}
+.addBatchMail {
+    text-align: right;
 }
 .el-select {
     width: 100%;
